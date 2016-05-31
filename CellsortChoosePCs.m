@@ -94,7 +94,7 @@ end
 pcs = reshape(Efull(:,usepcs), pixw, pixh, []);
 pcs = permute(pcs, [1, 2, 4, 3]);
 montage(pcs)
-colormap(hot)
+colormap(jet)
 axis on
 xl = xlim;
 yl = ylim;

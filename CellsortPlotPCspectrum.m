@@ -40,7 +40,8 @@ noiseigs = interp1(rhocdf, lambda, [p:-1:1]'/p, 'linear', 'extrap').^2 ;
 normrank = min(nt-1,length(CovEvals));
 pca_norm = CovEvals*noiseigs(normrank) / (CovEvals(normrank)*noiseigs(1));
 
-clf
+%clf
+subplot(2,1,1)
 plot(pca_norm, 'o-', 'Color', [1,1,1]*0.3, 'MarkerFaceColor', [1,1,1]*0.3, 'LineWidth',2)
 hold on
 plot(noiseigs / noiseigs(1), 'b-', 'LineWidth',2)
@@ -63,6 +64,12 @@ end
 fntitle = fn;
 fntitle(fn=='_') = ' ';
 title(fntitle)
+
+subplot(2,1,2)
+hold on
+plot(PCuse, cumsum(pca_norm(PCuse)/sum(pca_norm(PCuse))), 'o-', 'Color', [1,1,1]*0.3, 'MarkerFaceColor', [1,1,1]*0.3, 'LineWidth',2)
+axis tight
+formataxes
 
 function formataxes
 
