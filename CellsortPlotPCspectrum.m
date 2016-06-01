@@ -49,7 +49,7 @@ plot(2*noiseigs / noiseigs(1), 'b--', 'LineWidth',2)
 if ~isempty(PCuse)
     plot(PCuse, pca_norm(PCuse), 'rs', 'LineWidth',2)
 end
-hold off
+%hold off
 formataxes
 set(gca,'XScale','log','YScale','log', 'Color','none')
 xlabel('PC rank')
@@ -61,9 +61,9 @@ else
     legend('Data variance','Noise floor','2 x Noise floor','Retained PCs')
 end
 
-fntitle = fn;
-fntitle(fn=='_') = ' ';
-title(fntitle)
+%fntitle = fn;
+%fntitle(fn=='_') = ' ';
+%title(fntitle)
 
 subplot(2,1,2)
 hold on
