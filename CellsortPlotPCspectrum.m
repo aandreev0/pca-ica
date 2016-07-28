@@ -1,4 +1,4 @@
-function CellsortPlotPCspectrum(fn, CovEvals, PCuse)
+function pca_norm = CellsortPlotPCspectrum(fn, CovEvals, PCuse, GeneratePlots)
 % CellsortPlotPCspectrum(fn, CovEvals, PCuse)
 %
 % Plot the principal component (PC) spectrum and compare with the
@@ -17,7 +17,9 @@ function CellsortPlotPCspectrum(fn, CovEvals, PCuse)
 if nargin<3
     PCuse = [];
 end
-
+if nargin < 4
+    GeneratePlots = 0
+end
 [pixw,pixh] = size(imread(fn,1));
 npix = pixw*pixh;
 nt = tiff_frames(fn);
@@ -40,36 +42,39 @@ noiseigs = interp1(rhocdf, lambda, [p:-1:1]'/p, 'linear', 'extrap').^2 ;
 normrank = min(nt-1,length(CovEvals));
 pca_norm = CovEvals*noiseigs(normrank) / (CovEvals(normrank)*noiseigs(1));
 
-%clf
-subplot(2,1,1)
-plot(pca_norm, 'o-', 'Color', [1,1,1]*0.3, 'MarkerFaceColor', [1,1,1]*0.3, 'LineWidth',2)
-hold on
-plot(noiseigs / noiseigs(1), 'b-', 'LineWidth',2)
-plot(2*noiseigs / noiseigs(1), 'b--', 'LineWidth',2)
-if ~isempty(PCuse)
-    plot(PCuse, pca_norm(PCuse), 'rs', 'LineWidth',2)
-end
-%hold off
-formataxes
-set(gca,'XScale','log','YScale','log', 'Color','none')
-xlabel('PC rank')
-ylabel('Normalized variance')
-axis tight
-if isempty(PCuse)
-    legend('Data variance','Noise floor','2 x Noise floor')
-else
-    legend('Data variance','Noise floor','2 x Noise floor','Retained PCs')
-end
+if GeneratePlots
+    clf
+    subplot(2,1,1)
+    plot(pca_norm, 'o-', 'Color', [1,1,1]*0.3, 'MarkerFaceColor', [1,1,1]*0.3, 'LineWidth',2)
+    hold on
+    plot(noiseigs / noiseigs(1), 'b-', 'LineWidth',2)
+    plot(2*noiseigs / noiseigs(1), 'b--', 'LineWidth',2)
+    if ~isempty(PCuse)
+        plot(PCuse, pca_norm(PCuse), 'rs', 'LineWidth',2)
+    end
+    %hold off
+    formataxes
+    set(gca,'XScale','log','YScale','log', 'Color','none')
+    xlabel('PC rank')
+    ylabel('Normalized variance')
+    axis tight
+    if isempty(PCuse)
+        legend('Data variance','Noise floor','2 x Noise floor')
+    else
+        legend('Data variance','Noise floor','2 x Noise floor','Retained PCs')
+    end
 
-%fntitle = fn;
-%fntitle(fn=='_') = ' ';
-%title(fntitle)
+    %fntitle = fn;
+    %fntitle(fn=='_') = ' ';
+    %title(fntitle)
 
-subplot(2,1,2)
-hold on
-plot(PCuse, cumsum(pca_norm(PCuse)/sum(pca_norm(PCuse))), 'o-', 'Color', [1,1,1]*0.3, 'MarkerFaceColor', [1,1,1]*0.3, 'LineWidth',2)
-axis tight
-formataxes
+    subplot(2,1,2)
+    hold on
+    plot(PCuse, cumsum(pca_norm(PCuse)/sum(pca_norm(PCuse))), 'o-', 'Color', [1,1,1]*0.3, 'MarkerFaceColor', [1,1,1]*0.3, 'LineWidth',2)
+    axis tight
+    formataxes
+
+end
 
 function formataxes
 
