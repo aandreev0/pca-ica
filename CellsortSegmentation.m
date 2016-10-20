@@ -51,6 +51,7 @@ if smwidth>0
     tic
     for j = 1:size(ica_filters,1)
         ica_filtersuse = ica_filters(j,:,:);
+        % convert ica_filter magnitude to standart deviations
         ica_filtersuse = (ica_filtersuse - mean(ica_filtersuse(:)))/abs(std(ica_filtersuse(:)));
         ica_filtersbw(:,:,j) = (imfilter(ica_filtersuse, ica_filtersfilt, 'replicate', 'same') > thresh);
     end
