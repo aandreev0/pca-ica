@@ -9,15 +9,15 @@ else
 end
 
 % data_folder require trailing \
-data_folder = 'E:\aa\160918_huc-gcamp-KeepingLightsOn\';
-image_file = '120frTrial15minInt_900msExp-100mmLens_2xBin_8perc75mW940nm_813pm_1-scale2x_8bit.tif';
+%data_folder = 'E:\aa\160923_keepingLightsOn_DOB0919\';
+%image_file = '8percFPGA_85mW940nm_900msExp_640pm_100mmLens2xBin_1-scale2x.tif';
 %all_cell_sigs = {};
 %all_segcentroid = {};
 
 segcentroid_file = 'subtractMean0_all_segcentroid_t001-120.mat';
 cell_sigs_file = 'subtractMean0_all_cell_sigs_t001-120.mat';
 
-max_realTime = 178;
+max_realTime = 196;
 trial_length = 120;
 
 smwidth = 3;
@@ -25,7 +25,7 @@ thresh = 2;
 nPCs = 100;
 dsamp = [1 1]; % temp / spatial downsampling
 mu = 0.67;
-arealims = [10 18]; % adjusted based on scale
+arealims = [7 12]; % adjusted based on scale
 subtractmean = 0;
 termtol = 0.01;
 maxrounds = 200;
@@ -107,7 +107,7 @@ save([data_folder, segcentroid_file],'all_segcentroid');
 
 %% render one timepoint centroids
 figure
-scale_factor = 2;
+scale_factor = 1;
 render_time_point = 14;
 max_img = imread([data_folder,'/MAX_colored.tif'], render_time_point);
 imshow(max_img)

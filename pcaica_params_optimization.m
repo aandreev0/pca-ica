@@ -9,16 +9,20 @@ totalTimer = tic;
 
 
 % data_folder require trailing \
-data_folder = 'E:\aa\160918_huc-gcamp-KeepingLightsOn\';
-image_file = '120frTrial15minInt_900msExp-100mmLens_2xBin_8perc75mW940nm_813pm_1-scale2x_8bit-trial1.tif';
+data_folder = 'E:\aa\160722\';
+image_file = 'fullrun900msExp_120Z_15minInt_6percFPGA_650pm_1-RealT1-scale2x.tif';
 segcentroid_file = 'all_segcentroid_t001-120.mat';
 cell_sigs_file = 'all_cell_sigs_t001-120.mat';
+
+max_img = imread([data_folder,'MAX_fullrun900msExp_120Z_15minInt_6percFPGA_650pm_1-RealT1-scale2x.tif']);
+std_img = imread([data_folder,'STD_fullrun900msExp_120Z_15minInt_6percFPGA_650pm_1-RealT1-scale2x.tif']);
+
 
 trial_length = 120;
 trial_max_num = 50;
 
 
-flims = [1 60]
+flims = [1 120]
 
 fn = [data_folder, image_file];
 f0 = imread(fn,1);
@@ -31,11 +35,11 @@ parfor trial_id = 1:trial_max_num
 
     % pick random params
     smwidth = 3;1+round(rand*3);
-    thresh  = 2;rand*2+1;
-    nPCs = 20;100;round(50+rand*60);
+    thresh  = 2;
+    nPCs = 100;round(50+rand*60);
     dsamp = [1 1]; % temp / spatial downsampling
-    mu = 0.67; rand*0.8 + 0.1;
-    arealims = [10 16];round(sort(rand(1,2)*20) + 5);
+    mu = 0.67; rand*0.2 + 0.5;
+    arealims = round(sort(rand(1,2)*7) + 10);
     %% run PCA/ICA segmentation
     
     file_for_saving = ['pcaica_params_optimization\trial_data_',num2str(trial_id),'.mat'];
@@ -97,8 +101,6 @@ end
 toc(totalTimer)
 save(['pcaica_params_optimization\',num2str(iter),'params_data.mat'],'params_data','-v7.3')
 %% save images
-max_img = imread([data_folder,'120frTrial15minInt_900msExp-100mmLens_2xBin_8perc75mW940nm_813pm_1-scale2x_8bit-trial1_MAX_colored.tif']);
-std_img = imread([data_folder,'STD_120frTrial15minInt_900msExp-100mmLens_2xBin_8perc75mW940nm_813pm_1-scale2x_8bit-trial1.tif']);
 mkdir(['pcaica_params_optimization\',num2str(iter),'_segcentroids\']);
 show_image_flag = true
 %max_img = std_img;

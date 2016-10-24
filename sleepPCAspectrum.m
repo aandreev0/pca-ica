@@ -1,5 +1,5 @@
 % produce PCA spectral data as function of time and analysis window
-
+% saves data for further use by realT_PCAspectrum
 
 totalTimer = tic;
 
@@ -10,10 +10,10 @@ else
 end
 
 % data_folder require trailing \
-data_folder = 'E:\aa\160918_huc-gcamp-KeepingLightsOn\';
-image_file = '120frTrial15minInt_900msExp-100mmLens_2xBin_8perc75mW940nm_813pm_1-scale2x_8bit.tif';
+%data_folder = 'E:\aa\160923_keepingLightsOn_DOB0919\';
+%image_file = '8percFPGA_85mW940nm_900msExp_640pm_100mmLens2xBin_1-scale2x.tif';
 
-max_realTime = 178;
+max_realTime = 100;
 trial_window = 10:120; % window to analyze data
 trial_length = 120; % how long is single trial
 

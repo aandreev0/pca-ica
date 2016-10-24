@@ -5,7 +5,7 @@ dist_bins = linspace(0, 200, 20);
 
 time_resolution = 15; % min
 
-data_folder = 'E:\aa\160918_huc-gcamp-KeepingLightsOn';
+%data_folder = 'E:\aa\160918_huc-gcamp-KeepingLightsOn';
 
 metadata = load([data_folder,'\metadata.mat']);
 start_time = metadata.start_time;
