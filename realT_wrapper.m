@@ -40,7 +40,7 @@ day3_9am  = start_day + hours(48+9);
 day3_10pm = start_day + hours(48+22);
 
 %% run cycle
-for realTime_point = 1:max_realTime_point
+for realTime_point = min_realTime:max_realTime_point
     time_point = start_time + minutes(time_resolution*(realTime_point-1));
     max_img = imread([data_folder,'/MAX_colored.tif'], realTime_point);
     cell_sigs_raw      = all_cell_sigs{realTime_point};

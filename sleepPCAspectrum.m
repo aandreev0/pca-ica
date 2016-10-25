@@ -13,7 +13,7 @@ end
 %data_folder = 'E:\aa\160923_keepingLightsOn_DOB0919\';
 %image_file = '8percFPGA_85mW940nm_900msExp_640pm_100mmLens2xBin_1-scale2x.tif';
 
-max_realTime = 100;
+%max_realTime = 100;
 trial_window = 10:120; % window to analyze data
 trial_length = 120; % how long is single trial
 
@@ -38,7 +38,7 @@ parfor realTime_i = 1:max_realTime
 
     flims = [trial_window(1) trial_window(end)] + trial_length*(realTime_i-1);
 
-    fn = [data_folder, image_file];
+    fn = [data_folder,'\', image_file];
     outputdir = [int2str(iter),'_',date, '_nPCs',int2str(nPCs),'_file_',image_file];
     mkdir(outputdir);
 
@@ -56,7 +56,7 @@ end
 
 
 % saving PCA spectra into file:
-save([data_folder, data_container_file],'data_container');
+save([data_folder,'\', data_container_file],'data_container');
 
 
 

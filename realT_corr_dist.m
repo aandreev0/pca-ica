@@ -33,7 +33,7 @@ day3_9am  = start_day + hours(48+9);
 day3_10pm = start_day + hours(48+22);
 
 %% run cycle
-for realTime_point = 1:max_realTime_point
+for realTime_point = min_realTime:max_realTime_point
     time_point_time = start_time + minutes(time_resolution * (realTime_point-1));
     cell_pos = all_segcentroid{realTime_point};
     cell_sigs = all_cell_sigs{realTime_point};

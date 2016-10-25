@@ -17,7 +17,6 @@ end
 segcentroid_file = 'subtractMean0_all_segcentroid_t001-120.mat';
 cell_sigs_file = 'subtractMean0_all_cell_sigs_t001-120.mat';
 
-max_realTime = 196;
 trial_length = 120;
 
 smwidth = 3;
@@ -36,7 +35,7 @@ parfor realTime_i = 1:max_realTime
     
 flims = [1 trial_length] + trial_length*(realTime_i-1);
 
-fn = [data_folder, image_file];
+fn = [data_folder,'\', image_file];
 outputdir = [int2str(iter),'_',date, '_nPCs',int2str(nPCs),'_file_',image_file];
 mkdir(outputdir);
 
@@ -102,14 +101,14 @@ all_segcentroid{realTime_i} = segcentroid;
 end
 
 
-save([data_folder, cell_sigs_file],'all_cell_sigs');
-save([data_folder, segcentroid_file],'all_segcentroid');
+save([data_folder,'\', cell_sigs_file],'all_cell_sigs');
+save([data_folder,'\', segcentroid_file],'all_segcentroid');
 
 %% render one timepoint centroids
 figure
 scale_factor = 1;
 render_time_point = 14;
-max_img = imread([data_folder,'/MAX_colored.tif'], render_time_point);
+max_img = imread([data_folder,'\MAX_colored.tif'], render_time_point);
 imshow(max_img)
 hold on
 plot(all_segcentroid{render_time_point}(:,1)*scale_factor,all_segcentroid{render_time_point}(:,2)*scale_factor,'o','Color',[1 1 1])

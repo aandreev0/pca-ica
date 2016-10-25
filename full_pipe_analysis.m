@@ -1,13 +1,18 @@
 %% wrapper around all analysis
-data_folder = 'E:\aa\160723';
-%% sleep_pcaICA_code
+data_folder = 'E:\aa\160718'
+image_file = 'fish2fluo_900msExp15minInt_2x2xBin_6perc940BiDir_756_1-scale2x.tif';
 
-%%% sleepPCAspectrum
+min_realTime = 1;
+max_realTime = 70;
+
+%% sleep_pcaICA_code
+sleep_pcaIca_code
+
 
 %% generate PCA spectra
-image_file = '';
 sleepPCAspectrum
 data_folder
+
 %% render
 close all
 realT_PCAspectrum
